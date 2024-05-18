@@ -1,6 +1,4 @@
 siddhartha.js.org
 {
-      ...
-      "portfolio": "siddhartha.js.org"
-      ...
-    }
+      "siddhartha": "siddhartha.js.org",
+}
