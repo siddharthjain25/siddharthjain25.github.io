@@ -2337,6 +2337,15 @@ blockquote {
   display: grid;
 }
 
+.project-grid-hero {
+  text-align: center;
+  margin: 20px 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-style: normal;
+  display: block;
+}
+
 .heading-jumbo {
   text-align: left;
   margin-top: 0;
@@ -2877,6 +2886,15 @@ blockquote {
   margin-right: 0;
 }
 
+.project-image {
+  filter: grayscale(90%);
+  color: var(--black);
+  mix-blend-mode: normal;
+  margin-left: 0;
+  margin-right: 0;
+  width: 300px;
+}
+
 .logos-title-small {
   border-bottom: 1px solid #e4ebf3;
   margin-top: 50px;
@@ -3064,6 +3082,15 @@ blockquote {
 
   .grid-hero {
     grid-template-columns: 1fr;
+  }
+
+  .project-grid-hero {
+    text-align: center;
+    margin: 20px 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-style: normal;
+    display: block;
   }
 
   .heading-jumbo {
@@ -3272,6 +3299,10 @@ blockquote {
 
   .grid-hero {
     margin-bottom: -170px;
+    padding-top: 0;
+  }
+
+  .project-grid-hero {
     padding-top: 0;
   }
 
