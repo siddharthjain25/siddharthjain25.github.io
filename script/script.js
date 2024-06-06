@@ -6,6 +6,13 @@
  *   var Webflow = Webflow || [];
  *   Webflow.push(readyFunction);
  */
+document.addEventListener('DOMContentLoaded', function() {
+  var sound = document.getElementById('soundEffect');
+
+  document.body.addEventListener('click', function(event) {
+      sound.play();
+  });
+});
 
 (() => {
   var __create = Object.create;
