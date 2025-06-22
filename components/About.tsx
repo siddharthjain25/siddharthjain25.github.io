@@ -50,7 +50,7 @@ export const About = () => {
 
             <div className="space-y-4">
               {[
-                "A web developer by day and professional procrastinator by night. I love coding almost as much as I love finding creative ways to avoid it. My brain occasionally takes extended coffee breaks without my permission, leaving me staring at my screen like a cat watching a laser pointer. But hey, when my neurons decide to fire, I make the web a more interesting place, one quirky line of code at a time!",
+                "A web developer by day and professional procrastinator by night. I love coding almost as much as I love coming up with inventive ways to avoid it. Sometimes, my brain hits the pause button without warning, leaving me staring at the screen like a cat tracking a laser pointer. But hey, when the gears do start turning, I make the web a more interesting place—one quirky line of code at a time!",
               ].map((text, index) => (
                 <motion.p
                   key={index}
