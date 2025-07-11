@@ -4,4 +4,5 @@ export interface Project {
   image: string;
   demoUrl?: string;
   githubUrl?: string;
+  srsDocUrl?: string;
 }

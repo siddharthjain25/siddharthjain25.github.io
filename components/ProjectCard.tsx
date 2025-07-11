@@ -3,7 +3,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Card } from "@heroui/react";
-import { ExternalLink, Github, ArrowRight } from "lucide-react";
+import { ExternalLink, Github, ArrowRight, ScrollText } from "lucide-react";
 
 import { Project } from "@/types/project";
 
@@ -31,14 +31,14 @@ export function ProjectCard({
     {
       damping: 30,
       stiffness: 150,
-    },
+    }
   );
   const rotateY = useSpring(
     useTransform(mouseX, [-0.5, 0.5], ["-7deg", "7deg"]),
     {
       damping: 30,
       stiffness: 150,
-    },
+    }
   );
 
   // Lighting effect based on mouse position
@@ -170,6 +170,16 @@ export function ProjectCard({
                           onClick={(e) => e.stopPropagation()}
                         >
                           <Github className="w-5 h-5" />
+                        </Link>
+                      )}
+                      {project.srsDocUrl && (
+                        <Link
+                          className="text-zinc-400 hover:text-primary transition-all duration-300 hover:scale-110"
+                          href={project.srsDocUrl}
+                          target="_blank"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <ScrollText className="w-5 h-5" />
                         </Link>
                       )}
                       {project.demoUrl && (

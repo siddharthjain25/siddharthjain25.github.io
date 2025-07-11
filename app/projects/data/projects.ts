@@ -8,6 +8,7 @@ export const projects: Project[] = [
     image: "https://i.postimg.cc/XYHg7G06/xspark.png",
     githubUrl: "https://github.com/siddharthjain25/Blog-App",
     demoUrl: "https://xspark.onrender.com",
+    srsDocUrl: "https://github.com/siddharthjain25/Blog-App/blob/main/srs.md",
   },
   {
     title: "PhishWatch",
@@ -15,7 +16,8 @@ export const projects: Project[] = [
       "A simple web app that uses AI to check if a website is safe or not.",
     image: "https://i.postimg.cc/NMgGJM5L/phishwatch.png",
     githubUrl: "https://github.com/siddharthjain25/PhishWatch",
-    demoUrl: "#",
+    demoUrl: "https://phishwatch.vercel.app",
+    srsDocUrl: "https://github.com/siddharthjain25/PhishWatch/blob/main/srs.md",
   },
   {
     title: "Obsidian Pass",
@@ -24,6 +26,7 @@ export const projects: Project[] = [
     image: "https://i.postimg.cc/qRjJ9T3w/obsidianpass.png",
     githubUrl: "https://github.com/siddharthjain25/ObsidianPass",
     demoUrl: "https://obsidianpass.web.app",
+    srsDocUrl: "https://github.com/siddharthjain25/ObsidianPass/blob/main/srs.md",
   },
   {
     title: "Caffeine",
@@ -31,7 +34,7 @@ export const projects: Project[] = [
       "A chrome extension to increase your productivity by blocking websites that distracts you.",
     image: "https://i.postimg.cc/rpjQ4n43/caffeine.png",
     githubUrl: "https://github.com/siddharthjain25/Caffeine",
-    demoUrl: "#",
+    demoUrl: "",
   },
   {
     title: "Quotes API",
@@ -39,7 +42,7 @@ export const projects: Project[] = [
       "A simple API that provides random quotes with author names via HTTP requests.",
     image: "https://i.postimg.cc/VvQgQxPS/quotes-api.png",
     githubUrl: "https://github.com/siddharthjain25/quotes-api",
-    demoUrl: "#",
+    demoUrl: "",
   },
   {
     title: "Notes App",
@@ -47,14 +50,14 @@ export const projects: Project[] = [
       "A MERN stack notes app for creating, editing, and managing personal notes online.",
     image: "https://i.postimg.cc/0jDtz80d/notes-app.png",
     githubUrl: "https://github.com/siddharthjain25/notes-app-mern",
-    demoUrl: "#",
+    demoUrl: "",
   },
   {
     title: "News App",
     description: "News app built with ReactJS.",
     image: "https://i.postimg.cc/sXt6fB7g/news-app.png",
     githubUrl: "https://github.com/siddharthjain25/news-app",
-    demoUrl: "#",
+    demoUrl: "",
   },
   {
     title: "Nami Engine",
@@ -62,6 +65,6 @@ export const projects: Project[] = [
       "A simple and strong chess engine, written in Python. With its simple UCI interface.",
     image: "https://i.postimg.cc/5ttQynSs/nami.png",
     githubUrl: "https://github.com/siddharthjain25/Nami-Engine",
-    demoUrl: "#",
+    demoUrl: "",
   },
 ];
