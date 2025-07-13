@@ -12,12 +12,12 @@ const inspiringTexts = [
 ];
 
 const services = [
+  "I use Arch btw!",
+  "Full-Stack Development",
   "Web Development",
   "Java Developer",
-  "Full-Stack Development",
   "JavaScript Developer",
   "Learning AWS",
-  "I use Arch btw!",
 ];
 
 interface LoaderScreenProps {
