@@ -126,6 +126,42 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <section className="py-20 bg-black text-white relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            viewport={{ once: true }}
+            whileInView={{ opacity: 1, y: 0 }}
+          >
+            <span className="inline-block text-sm font-mono text-primary/80 bg-primary/5 border border-primary/10 px-3 py-1 rounded-full mb-4">
+              GitHub Activity
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold font-grotesk mb-4">
+              My OpenSource Contributions
+            </h2>
+            <p className="text-muted-foreground font-mono max-w-2xl mx-auto">
+              A visual representation of my GitHub contributions over the past
+              year.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0 }}
+            viewport={{ once: true }}
+            whileInView={{ opacity: 1 }}
+          >
+            <img
+              src="https://github-readme-stats.vercel.app/api?username=siddharthjain25&show_icons=true&theme=dark&hide_title=true&hide_rank=true&hide=stars&bg_color=000000&text_color=ffffff"
+              className="rounded-xl shadow-lg border border-white/10 mx-auto w-full max-w-xl filter grayscale transition duration-300"
+              alt="GitHub Stats"
+            />
+          </motion.div>
+        </div>
+      </section>
+
       <Skills />
     </main>
   );
