@@ -130,7 +130,7 @@ export const About = () => {
                 viewport={{ once: true }}
                 whileInView={{ opacity: 1, y: 0 }}
               >
-                Currently, I'm listening to <b>{renderListeningStatus()}</b>
+                Currently, I&apos;m listening to <b>{renderListeningStatus()}</b>
               </motion.p>
             </div>
 
