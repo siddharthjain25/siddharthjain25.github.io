@@ -27,13 +27,16 @@ const useSpotify = (refreshInterval = 30000) => {
       try {
         // Note: Remember to use a public URL for production
         const response = await fetch("https://spot.sylveon.live/now-playing");
+
         if (response.status === 204 || response.status > 400) {
           setTrack(null);
           // Set error back to null if the request is successful but no track is playing
           setError(null);
+
           return;
         }
         const data = await response.json();
+
         setTrack(data);
         setError(null); // Clear any previous errors on success
       } catch (err) {
@@ -67,6 +70,7 @@ export const About = () => {
     if (error || !track) {
       return "a bit of silence.";
     }
+
     return `"${track.title}" by ${track.artist}.`;
   };
 
@@ -130,7 +134,8 @@ export const About = () => {
                 viewport={{ once: true }}
                 whileInView={{ opacity: 1, y: 0 }}
               >
-                Currently, I&apos;m listening to <b>{renderListeningStatus()}</b>
+                Currently, I&apos;m listening to{" "}
+                <b>{renderListeningStatus()}</b>
               </motion.p>
             </div>
 

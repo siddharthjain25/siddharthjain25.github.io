@@ -17,11 +17,13 @@ export const Hero = () => {
 
   useEffect(() => {
     const hasVisited = localStorage.getItem("hasVisitedBefore");
+
     if (!hasVisited) {
       const timer = setTimeout(() => {
         setShouldAnimate(true);
         localStorage.setItem("hasVisitedBefore", "true");
       }, 3700);
+
       return () => clearTimeout(timer);
     } else {
       setShouldAnimate(true);

@@ -154,9 +154,9 @@ export default function AboutPage() {
             whileInView={{ opacity: 1 }}
           >
             <img
-              src="https://github-readme-stats.vercel.app/api?username=siddharthjain25&show_icons=true&theme=dark&hide_title=true&hide_rank=true&hide=stars&bg_color=000000&text_color=ffffff"
-              className="rounded-xl shadow-lg border border-white/10 mx-auto w-full max-w-xl filter grayscale transition duration-300"
               alt="GitHub Stats"
+              className="rounded-xl shadow-lg border border-white/10 mx-auto w-full max-w-xl filter grayscale transition duration-300"
+              src="https://github-readme-stats.vercel.app/api?username=siddharthjain25&show_icons=true&theme=dark&hide_title=true&hide_rank=true&hide=stars&bg_color=000000&text_color=ffffff"
             />
           </motion.div>
         </div>

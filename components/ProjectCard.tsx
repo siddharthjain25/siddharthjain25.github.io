@@ -31,14 +31,14 @@ export function ProjectCard({
     {
       damping: 30,
       stiffness: 150,
-    }
+    },
   );
   const rotateY = useSpring(
     useTransform(mouseX, [-0.5, 0.5], ["-7deg", "7deg"]),
     {
       damping: 30,
       stiffness: 150,
-    }
+    },
   );
 
   // Lighting effect based on mouse position
@@ -173,7 +173,7 @@ export function ProjectCard({
                             window.open(
                               project.githubUrl,
                               "_blank",
-                              "noopener,noreferrer"
+                              "noopener,noreferrer",
                             );
                           }}
                         >
@@ -188,7 +188,7 @@ export function ProjectCard({
                             window.open(
                               project.srsDocUrl,
                               "_blank",
-                              "noopener,noreferrer"
+                              "noopener,noreferrer",
                             );
                           }}
                         >
@@ -203,7 +203,7 @@ export function ProjectCard({
                             window.open(
                               project.demoUrl,
                               "_blank",
-                              "noopener,noreferrer"
+                              "noopener,noreferrer",
                             );
                           }}
                         >

@@ -26,7 +26,8 @@ export const projects: Project[] = [
     image: "https://i.postimg.cc/qRjJ9T3w/obsidianpass.png",
     githubUrl: "https://github.com/siddharthjain25/ObsidianPass",
     demoUrl: "https://obsidianpass.web.app",
-    srsDocUrl: "https://github.com/siddharthjain25/ObsidianPass/blob/main/srs.md",
+    srsDocUrl:
+      "https://github.com/siddharthjain25/ObsidianPass/blob/main/srs.md",
   },
   {
     title: "Caffeine",
