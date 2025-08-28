@@ -18,6 +18,8 @@ const quickInfo = [
 // Custom hook to fetch Spotify currently playing song (same as before)
 const useSpotify = (refreshInterval = 30000) => {
   const [track, setTrack] = useState(null);
+  const [title, setTitle] = useState("");
+  const [artist, setArtist] = useState("");
   // Corrected: Explicitly type the state as string | null
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -30,6 +32,8 @@ const useSpotify = (refreshInterval = 30000) => {
 
         if (response.status === 204 || response.status > 400) {
           setTrack(null);
+          setTitle("");
+          setArtist("");
           // Set error back to null if the request is successful but no track is playing
           setError(null);
 
@@ -38,6 +42,8 @@ const useSpotify = (refreshInterval = 30000) => {
         const data = await response.json();
 
         setTrack(data);
+        setTitle(data.title);
+        setArtist(data.artist);
         setError(null); // Clear any previous errors on success
       } catch (err) {
         // Corrected: The value passed to setError is now a string, which is a valid type
@@ -54,12 +60,12 @@ const useSpotify = (refreshInterval = 30000) => {
     return () => clearInterval(interval);
   }, [refreshInterval]);
 
-  return { track, isLoading, error };
+  return { track, title, artist, isLoading, error };
 };
 
 export const About = () => {
   // 1. Call the hook to get Spotify data
-  const { track, isLoading, error } = useSpotify();
+  const { track, title, artist, isLoading, error } = useSpotify();
 
   // 2. Helper function to render the status safely
   const renderListeningStatus = () => {
@@ -71,7 +77,7 @@ export const About = () => {
       return "a bit of silence.";
     }
 
-    return `"${track.title}" by ${track.artist}.`;
+    return `"${title}" by ${artist}.`;
   };
 
   return (

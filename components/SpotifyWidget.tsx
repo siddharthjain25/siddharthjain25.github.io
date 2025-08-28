@@ -9,6 +9,10 @@ import { Card, CardContent } from "@/components/ui/card";
 // Custom hook to fetch Spotify currently playing song (same as before)
 const useSpotify = (refreshInterval = 30000) => {
   const [track, setTrack] = useState(null);
+  const [albumUrl, setAlbumUrl] = useState("");
+  const [title, setTitle] = useState("");
+  const [artist, setArtist] = useState("");
+  const [songUrl, setSongUrl] = useState("");
   // Corrected: Explicitly type the state as string | null
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,6 +25,10 @@ const useSpotify = (refreshInterval = 30000) => {
 
         if (response.status === 204 || response.status > 400) {
           setTrack(null);
+          setAlbumUrl("");
+          setArtist("");
+          setSongUrl("");
+          setTitle("");
           // Set error back to null if the request is successful but no track is playing
           setError(null);
 
@@ -29,6 +37,10 @@ const useSpotify = (refreshInterval = 30000) => {
         const data = await response.json();
 
         setTrack(data);
+        setAlbumUrl(data.albumImageUrl);
+        setArtist(data.artist);
+        setSongUrl(data.songUrl);
+        setTitle(data.title);
         setError(null); // Clear any previous errors on success
       } catch (err) {
         // Corrected: The value passed to setError is now a string, which is a valid type
@@ -45,11 +57,11 @@ const useSpotify = (refreshInterval = 30000) => {
     return () => clearInterval(interval);
   }, [refreshInterval]);
 
-  return { track, isLoading, error };
+  return { track, title, artist, songUrl, albumUrl, isLoading, error };
 };
 
 const SpotifyWidget = () => {
-  const { track, isLoading, error } = useSpotify();
+  const { track, title, artist, songUrl, albumUrl, isLoading, error } = useSpotify();
 
   return (
     <motion.div
@@ -82,17 +94,17 @@ const SpotifyWidget = () => {
                   <Music className="w-10 h-10 text-gray-400" />{" "}
                   {/* Changed from w-8 h-8 */}
                 </div>
-              ) : error || !track || !track.albumImageUrl ? (
+              ) : error || !track || !albumUrl ? (
                 <div className="w-full h-full bg-gray-800 flex items-center justify-center">
                   <Music className="w-10 h-10 text-gray-500" />{" "}
                   {/* Changed from w-8 h-8 */}
                 </div>
               ) : (
                 <img
-                  alt={`Album art for ${track.title}`}
+                  alt={`Album art for ${title}`}
                   className="object-cover w-full h-full"
                   height={96} // Matched to h-24
-                  src={track.albumImageUrl}
+                  src={albumUrl}
                   width={96} // Matched to w-24
                 />
               )}
@@ -126,19 +138,19 @@ const SpotifyWidget = () => {
               ) : (
                 <a
                   className="block group/track cursor-pointer"
-                  href={track.songUrl}
+                  href={songUrl}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
                   <p className="font-grotesk text-lg font-semibold text-white truncate group-hover/track:text-primary transition-colors">
                     {" "}
                     {/* Changed from default size */}
-                    {track.title}
+                    {title}
                   </p>
                   <p className="font-mono text-base text-muted-foreground truncate group-hover/track:text-white transition-colors">
                     {" "}
                     {/* Changed from text-sm */}
-                    {track.artist}
+                    {artist}
                   </p>
                 </a>
               )}
