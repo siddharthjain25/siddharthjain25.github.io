@@ -163,34 +163,52 @@ export function ProjectCard({
                   <div className="flex items-center justify-between mt-auto">
                     <div className="flex items-center gap-4">
                       {project.githubUrl && (
-                        <Link
+                        <button
                           className="text-zinc-400 hover:text-primary transition-all duration-300 hover:scale-110"
-                          href={project.githubUrl}
-                          target="_blank"
-                          onClick={(e) => e.stopPropagation()}
+                          // Change: Use an onClick handler
+                          onClick={(e) => {
+                            // Change: Stop the click from propagating to the parent Link
+                            e.stopPropagation();
+                            // Change: Open the link in a new tab manually
+                            window.open(
+                              project.githubUrl,
+                              "_blank",
+                              "noopener,noreferrer"
+                            );
+                          }}
                         >
                           <Github className="w-5 h-5" />
-                        </Link>
+                        </button>
                       )}
                       {project.srsDocUrl && (
-                        <Link
+                        <button
                           className="text-zinc-400 hover:text-primary transition-all duration-300 hover:scale-110"
-                          href={project.srsDocUrl}
-                          target="_blank"
-                          onClick={(e) => e.stopPropagation()}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.open(
+                              project.srsDocUrl,
+                              "_blank",
+                              "noopener,noreferrer"
+                            );
+                          }}
                         >
                           <ScrollText className="w-5 h-5" />
-                        </Link>
+                        </button>
                       )}
                       {project.demoUrl && (
-                        <Link
+                        <button
                           className="text-zinc-400 hover:text-primary transition-all duration-300 hover:scale-110"
-                          href={project.demoUrl}
-                          target="_blank"
-                          onClick={(e) => e.stopPropagation()}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.open(
+                              project.demoUrl,
+                              "_blank",
+                              "noopener,noreferrer"
+                            );
+                          }}
                         >
                           <ExternalLink className="w-5 h-5" />
-                        </Link>
+                        </button>
                       )}
                     </div>
                   </div>

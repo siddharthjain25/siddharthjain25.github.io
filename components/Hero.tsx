@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Card, Progress, CardBody } from "@heroui/react";
 import { useEffect, useState } from "react";
 
 import { GridBackground } from "./ui/grid-background";
+import SpotifyWidget from "./SpotifyWidget";
 
 export const Hero = () => {
   const [ref, inView] = useInView({
@@ -16,19 +16,14 @@ export const Hero = () => {
   const [shouldAnimate, setShouldAnimate] = useState(false);
 
   useEffect(() => {
-    // Check if this is the first visit
     const hasVisited = localStorage.getItem("hasVisitedBefore");
-
     if (!hasVisited) {
-      // First visit - apply the delay
       const timer = setTimeout(() => {
         setShouldAnimate(true);
         localStorage.setItem("hasVisitedBefore", "true");
       }, 3700);
-
       return () => clearTimeout(timer);
     } else {
-      // Not first visit - animate immediately
       setShouldAnimate(true);
     }
   }, []);
@@ -59,99 +54,14 @@ export const Hero = () => {
               </p>
             </motion.div>
 
-            {/* Project Status Cards */}
+            {/* Spotify Widget */}
             <motion.div
               animate={inView && shouldAnimate ? { opacity: 1, y: 0 } : {}}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12"
+              className="flex justify-center mt-12"
               initial={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <Card>
-                <CardBody className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 rounded-xl bg-secondary">
-                      <svg
-                        className="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-mono text-sm text-muted-foreground">
-                        Project Status
-                      </h3>
-                      <p className="font-grotesk">Available</p>
-                    </div>
-                  </div>
-                  <Progress className="h-2" value={100} />
-                </CardBody>
-              </Card>
-
-              <Card>
-                <CardBody className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 rounded-xl bg-secondary">
-                      <svg
-                        className="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M13 10V3L4 14h7v7l9-11h-7z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-mono text-sm text-muted-foreground">
-                        Response Time
-                      </h3>
-                      <p className="font-grotesk">&lt; 24 hours</p>
-                    </div>
-                  </div>
-                  <Progress className="h-2" value={75} />
-                </CardBody>
-              </Card>
-
-              <Card>
-                <CardBody className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 rounded-xl bg-secondary">
-                      <svg
-                        className="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-mono text-sm text-muted-foreground">
-                        Lazy
-                      </h3>
-                      <p className="font-grotesk">100%</p>
-                    </div>
-                  </div>
-                  <Progress className="h-2" value={98} />
-                </CardBody>
-              </Card>
+              <SpotifyWidget />
             </motion.div>
           </div>
         </div>
