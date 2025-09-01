@@ -16,7 +16,7 @@ const quickInfo = [
 ];
 
 // Custom hook to fetch Spotify currently playing song (same as before)
-const useSpotify = (refreshInterval = 30000) => {
+const useSpotify = (refreshInterval = 3000) => {
   const [track, setTrack] = useState(null);
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
@@ -28,7 +28,7 @@ const useSpotify = (refreshInterval = 30000) => {
     const fetchNowPlaying = async () => {
       try {
         // Note: Remember to use a public URL for production
-        const response = await fetch("https://spot.sylveon.live/now-playing");
+        const response = await fetch("https://siddharth25op-spotify-status.vercel.app/api/now-playing");
 
         if (response.status === 204 || response.status > 400) {
           setTrack(null);

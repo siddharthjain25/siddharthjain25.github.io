@@ -3,11 +3,11 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Music } from "lucide-react";
-
 import { Card, CardContent } from "@/components/ui/card";
+import WaveBars from "@/components/WaveBars";
 
 // Custom hook to fetch Spotify currently playing song (same as before)
-const useSpotify = (refreshInterval = 30000) => {
+const useSpotify = (refreshInterval = 3000) => {
   const [track, setTrack] = useState(null);
   const [albumUrl, setAlbumUrl] = useState("");
   const [title, setTitle] = useState("");
@@ -21,7 +21,9 @@ const useSpotify = (refreshInterval = 30000) => {
     const fetchNowPlaying = async () => {
       try {
         // Note: Remember to use a public URL for production
-        const response = await fetch("https://spot.sylveon.live/now-playing");
+        const response = await fetch(
+          "https://siddharth25op-spotify-status.vercel.app/api/now-playing"
+        );
 
         if (response.status === 204 || response.status > 400) {
           setTrack(null);
@@ -61,7 +63,8 @@ const useSpotify = (refreshInterval = 30000) => {
 };
 
 const SpotifyWidget = () => {
-  const { track, title, artist, songUrl, albumUrl, isLoading, error } = useSpotify();
+  const { track, title, artist, songUrl, albumUrl, isLoading, error } =
+    useSpotify();
 
   return (
     <motion.div
@@ -94,7 +97,7 @@ const SpotifyWidget = () => {
                   <Music className="w-10 h-10 text-gray-400" />{" "}
                   {/* Changed from w-8 h-8 */}
                 </div>
-              ) : error || !track || !albumUrl ? (
+              ) : error || !songUrl || !albumUrl ? (
                 <div className="w-full h-full bg-gray-800 flex items-center justify-center">
                   <Music className="w-10 h-10 text-gray-500" />{" "}
                   {/* Changed from w-8 h-8 */}
@@ -111,11 +114,6 @@ const SpotifyWidget = () => {
             </div>
             {/* Track Info */}
             <div className="flex-1 min-w-0">
-              <h3 className="font-mono text-sm text-primary/70 mb-1 flex items-center gap-2">
-                {" "}
-                {/* Changed from text-xs */}
-                Now Playing On Spotify
-              </h3>
               {isLoading ? (
                 <div className="space-y-2">
                   {" "}
@@ -124,7 +122,7 @@ const SpotifyWidget = () => {
                   {/* Sized up for larger font */}
                   <div className="h-4 bg-gray-700 rounded w-2/3 animate-pulse" />
                 </div>
-              ) : error || !track ? (
+              ) : error || !songUrl ? (
                 <div className="space-y-1">
                   <p className="font-grotesk text-lg font-semibold text-white truncate">
                     Not Playing
@@ -148,10 +146,9 @@ const SpotifyWidget = () => {
                     {title}
                   </p>
                   <p className="font-mono text-base text-muted-foreground truncate group-hover/track:text-white transition-colors">
-                    {" "}
-                    {/* Changed from text-sm */}
                     {artist}
                   </p>
+                  {songUrl && <WaveBars />}
                 </a>
               )}
             </div>
