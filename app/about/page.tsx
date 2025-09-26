@@ -2,14 +2,12 @@
 
 import { motion } from "framer-motion";
 import {
-  Github,
   Brain,
-  Blocks,
-  Cloud,
-  Smartphone,
   Shield,
   GitBranch,
   LucideIcon,
+  ChartArea,
+  GitPullRequest,
 } from "lucide-react";
 
 import { About } from "@/components/About";
@@ -26,7 +24,7 @@ interface Interest {
 const interests: Interest[] = [
   {
     name: "Open Source",
-    icon: Github,
+    icon: GitPullRequest,
     description: "Contributing to the community",
   },
   {
@@ -35,19 +33,9 @@ const interests: Interest[] = [
     description: "Machine Learning & Neural Networks",
   },
   {
-    name: "Web3",
-    icon: Blocks,
-    description: "Blockchain & Smart Contracts",
-  },
-  {
-    name: "Cloud Computing",
-    icon: Cloud,
-    description: "Scalable Infrastructure",
-  },
-  {
-    name: "IoT",
-    icon: Smartphone,
-    description: "Connected Devices",
+    name: "Data Analytics",
+    icon: ChartArea,
+    description: "Descriptive, Diagnostic, Predictive, Prescriptive Analytics",
   },
   {
     name: "Cybersecurity",
