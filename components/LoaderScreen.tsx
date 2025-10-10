@@ -22,32 +22,47 @@ const services = [
 
 interface LoaderScreenProps {
   onLoadingComplete?: () => void;
+  children?: React.ReactNode;
 }
 
-export const LoaderScreen = ({ onLoadingComplete }: LoaderScreenProps) => {
+export const LoaderScreen = ({
+  onLoadingComplete,
+  children,
+}: LoaderScreenProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [showContent, setShowContent] = useState(true);
   const [isFullyRemoved, setIsFullyRemoved] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+
+    // Check if user has visited before
+    const hasVisited = localStorage.getItem("hasVisitedBefore");
+
+    if (hasVisited) {
+      // Skip loader for returning visitors
+      setIsLoading(false);
+      setIsFullyRemoved(true);
+      return;
+    }
+
     document.body.style.overflow = "hidden";
 
     // Rotate through texts more slowly
     const textInterval = setInterval(() => {
       setCurrentTextIndex((prev) => (prev + 1) % inspiringTexts.length);
-    }, 1200); // Slower text rotation
+    }, 1200);
 
     // Simulate loading progress
     const progressInterval = setInterval(() => {
       setLoadingProgress((prev) => {
         if (prev >= 100) {
           clearInterval(progressInterval);
-
           return 100;
         }
-
         return prev + Math.random() * 15;
       });
     }, 200);
@@ -58,6 +73,7 @@ export const LoaderScreen = ({ onLoadingComplete }: LoaderScreenProps) => {
 
     const loadingTimer = setTimeout(() => {
       setIsLoading(false);
+      localStorage.setItem("hasVisitedBefore", "true");
       if (onLoadingComplete) {
         onLoadingComplete();
       }
@@ -78,111 +94,119 @@ export const LoaderScreen = ({ onLoadingComplete }: LoaderScreenProps) => {
     };
   }, [onLoadingComplete]);
 
+  // Prevent hydration mismatch - don't render loader on server
+  if (!isMounted) {
+    return <>{children}</>;
+  }
+
   if (isFullyRemoved) {
-    return null;
+    return <>{children}</>;
   }
 
   return (
-    <AnimatePresence mode="wait">
-      {isLoading && (
-        <motion.div
-          animate={{ opacity: 1 }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
-          exit={{ opacity: 0 }}
-          initial={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          {/* Black background with fade */}
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading && (
           <motion.div
             animate={{ opacity: 1 }}
-            className="absolute inset-0 bg-black"
+            className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
             exit={{ opacity: 0 }}
             initial={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          />
-
-          {/* Gradient overlay */}
-          <motion.div
-            animate={{ opacity: showContent ? 0.6 : 0 }}
-            className="absolute"
-            initial={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-          />
-
-          <div className="relative z-10 flex flex-col items-center max-w-2xl mx-auto px-4">
-            {/* Large number with glowing effect */}
+          >
+            {/* Black background with fade */}
             <motion.div
-              animate={{
-                scale: showContent ? 1 : 0.8,
-                opacity: showContent ? 1 : 0,
-              }}
-              className="relative mb-12"
-              initial={{ scale: 0.5, opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <span className="text-[12rem] font-bold text-transparent bg-clip-text bg-gradient-to-b from-primary via-primary/80 to-primary/20 font-mono leading-none filter blur-[2px] absolute inset-0 animate-pulse" />
-              <span className="text-[12rem] font-bold text-transparent bg-clip-text bg-gradient-to-b from-primary via-primary/80 to-primary/20 font-mono leading-none relative">
-                {Math.min(Math.round(loadingProgress), 100)}
-              </span>
-            </motion.div>
+              animate={{ opacity: 1 }}
+              className="absolute inset-0 bg-black"
+              exit={{ opacity: 0 }}
+              initial={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+            />
 
-            {/* Dynamic text animation */}
-            <AnimatePresence mode="wait">
-              {showContent && (
-                <motion.div
-                  key={currentTextIndex}
-                  animate={{ y: 0, opacity: 1 }}
-                  className="text-center mb-16 relative"
-                  exit={{ y: -20, opacity: 0 }}
-                  initial={{ y: 20, opacity: 0 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                >
-                  <motion.div className="text-3xl font-grotesk font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-primary mb-3">
-                    {inspiringTexts[currentTextIndex]}
-                  </motion.div>
-                  <motion.div className="text-xl text-primary/60">
-                    {services[currentTextIndex]}
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Loading bar with glow effect */}
+            {/* Gradient overlay */}
             <motion.div
-              animate={{
-                opacity: showContent ? 1 : 0,
-              }}
-              className="relative w-80 h-1 bg-white/5 rounded-full overflow-hidden mb-8"
+              animate={{ opacity: showContent ? 0.6 : 0 }}
+              className="absolute"
+              initial={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-            >
+            />
+
+            <div className="relative z-10 flex flex-col items-center max-w-2xl mx-auto px-4">
+              {/* Large number with glowing effect */}
               <motion.div
-                animate={{ width: `${Math.min(loadingProgress, 100)}%` }}
-                className="absolute inset-y-0 left-0 bg-primary rounded-full"
-                initial={{ width: "0%" }}
-                style={{
-                  boxShadow: "0 0 20px rgba(var(--primary-rgb), 0.5)",
+                animate={{
+                  scale: showContent ? 1 : 0.8,
+                  opacity: showContent ? 1 : 0,
                 }}
-              />
-            </motion.div>
+                className="relative mb-12"
+                initial={{ scale: 0.5, opacity: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <span className="text-[12rem] font-bold text-transparent bg-clip-text bg-gradient-to-b from-primary via-primary/80 to-primary/20 font-mono leading-none filter blur-[2px] absolute inset-0 animate-pulse" />
+                <span className="text-[12rem] font-bold text-transparent bg-clip-text bg-gradient-to-b from-primary via-primary/80 to-primary/20 font-mono leading-none relative">
+                  {Math.min(Math.round(loadingProgress), 100)}
+                </span>
+              </motion.div>
 
-            {/* Loading spinner with glow */}
-            <motion.div
-              animate={{
-                scale: showContent ? 1 : 0,
-                opacity: showContent ? 1 : 0,
-              }}
-              className="relative"
-              initial={{ scale: 0 }}
-              style={{
-                filter: "drop-shadow(0 0 10px rgba(var(--primary-rgb), 0.3))",
-              }}
-              transition={{ duration: 0.4 }}
-            >
-              <Loader2 className="w-8 h-8 text-primary animate-spin" />
-            </motion.div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+              {/* Dynamic text animation */}
+              <AnimatePresence mode="wait">
+                {showContent && (
+                  <motion.div
+                    key={currentTextIndex}
+                    animate={{ y: 0, opacity: 1 }}
+                    className="text-center mb-16 relative"
+                    exit={{ y: -20, opacity: 0 }}
+                    initial={{ y: 20, opacity: 0 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                  >
+                    <motion.div className="text-3xl font-grotesk font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-primary mb-3">
+                      {inspiringTexts[currentTextIndex]}
+                    </motion.div>
+                    <motion.div className="text-xl text-primary/60">
+                      {services[currentTextIndex]}
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Loading bar with glow effect */}
+              <motion.div
+                animate={{
+                  opacity: showContent ? 1 : 0,
+                }}
+                className="relative w-80 h-1 bg-white/5 rounded-full overflow-hidden mb-8"
+                transition={{ duration: 0.5 }}
+              >
+                <motion.div
+                  animate={{ width: `${Math.min(loadingProgress, 100)}%` }}
+                  className="absolute inset-y-0 left-0 bg-primary rounded-full"
+                  initial={{ width: "0%" }}
+                  style={{
+                    boxShadow: "0 0 20px rgba(168, 85, 247, 0.5)",
+                  }}
+                />
+              </motion.div>
+
+              {/* Loading spinner with glow */}
+              <motion.div
+                animate={{
+                  scale: showContent ? 1 : 0,
+                  opacity: showContent ? 1 : 0,
+                }}
+                className="relative"
+                initial={{ scale: 0 }}
+                style={{
+                  filter: "drop-shadow(0 0 10px rgba(168, 85, 247, 0.3))",
+                }}
+                transition={{ duration: 0.4 }}
+              >
+                <Loader2 className="w-8 h-8 text-primary animate-spin" />
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {children}
+    </>
   );
 };

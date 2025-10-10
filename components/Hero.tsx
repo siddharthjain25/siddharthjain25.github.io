@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
 import { GridBackground } from "./ui/grid-background";
 import SpotifyWidget from "./SpotifyWidget";
 
@@ -35,8 +36,8 @@ export const Hero = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.2,
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
       },
     },
   };
@@ -48,96 +49,177 @@ export const Hero = () => {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.22, 1, 0.36, 1], // Custom easing for smooth motion
+        ease: [0.22, 1, 0.36, 1],
       },
     },
   };
+
+  const socialLinks = [
+    {
+      icon: Github,
+      href: "https://github.com/siddharthjain25",
+      label: "GitHub",
+    },
+    {
+      icon: Linkedin,
+      href: "https://www.linkedin.com/in/siddharth25op",
+      label: "LinkedIn",
+    },
+    { icon: Mail, href: "mailto:work@siddharth.is-a.dev", label: "Email" },
+  ];
 
   return (
     <GridBackground>
       <section
         ref={ref}
-        className="relative flex items-center justify-center min-h-[90vh] overflow-hidden"
+        className="relative flex items-center justify-center min-h-screen overflow-hidden pt-20 pb-16"
       >
-        <div className="container z-50 px-4">
+        {/* Enhanced Background Effects */}
+        <div className="absolute inset-0 -z-10">
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-3xl"
+            transition={{ duration: 8, repeat: Infinity }}
+          />
+          <motion.div
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.2, 0.5, 0.2],
+            }}
+            className="absolute bottom-1/4 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl"
+            transition={{ duration: 8, repeat: Infinity, delay: 2 }}
+          />
+        </div>
+
+        <div className="container z-10 px-4">
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate={inView && shouldAnimate ? "visible" : "hidden"}
-            className="max-w-5xl mx-auto text-center space-y-16"
+            className="max-w-6xl mx-auto space-y-16"
           >
             {/* Main Content */}
-            <div className="space-y-8">
+            <div className="space-y-10 text-center">
               {/* Greeting Badge */}
-              <motion.div variants={itemVariants} className="inline-flex">
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-mono text-sm border border-primary/20">
+              <motion.div
+                variants={itemVariants}
+                className="flex justify-center"
+              >
+                <motion.span
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-mono text-sm border border-primary/20 backdrop-blur-sm"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                   </span>
-                  Available for work
-                </span>
+                  Available for opportunities
+                </motion.span>
               </motion.div>
 
-              {/* Main Title */}
-              <motion.div variants={itemVariants}>
-                <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold font-grotesk tracking-tight">
-                  <span className="block text-muted-foreground/60 text-3xl md:text-4xl lg:text-5xl font-medium mb-4">
-                    Hi, I am
-                  </span>
-                  <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+              {/* Main Title with Enhanced Typography */}
+              <motion.div variants={itemVariants} className="space-y-6">
+                <motion.p
+                  className="text-2xl md:text-3xl lg:text-4xl font-medium text-muted-foreground font-mono"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                >
+                  Hey there! I'm
+                </motion.p>
+
+                <h1 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold font-grotesk tracking-tight">
+                  <motion.span
+                    className="block bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent"
+                    animate={{
+                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                    }}
+                    style={{
+                      backgroundSize: "200% 200%",
+                    }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  >
                     Siddharth Jain
-                  </span>
+                  </motion.span>
                 </h1>
               </motion.div>
 
-              {/* Description */}
-              <motion.p
-                variants={itemVariants}
-                className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto font-mono leading-relaxed"
-              >
-                Full Stack Developer specializing in building exceptional
-                digital experiences with modern technologies.
-              </motion.p>
+              {/* Role & Description */}
+              <motion.div variants={itemVariants} className="space-y-4">
+                <p className="text-2xl md:text-3xl font-bold text-primary">
+                  Full Stack Developer
+                </p>
+                <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto font-mono leading-relaxed">
+                  Crafting exceptional digital experiences with modern web
+                  technologies. Specializing in React, Next.js, and cloud
+                  solutions.
+                </p>
+              </motion.div>
 
               {/* CTA Buttons */}
               <motion.div
                 variants={itemVariants}
                 className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
               >
-                <Link href="/projects">
-                  <button className="group relative px-8 py-4 bg-primary text-primary-foreground rounded-lg font-medium text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25">
-                    <span className="relative z-10">View My Work</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  </button>
-                </Link>
-                <Link href="/contact">
-                  <button className="px-8 py-4 border-2 border-primary/20 text-foreground rounded-lg font-medium text-lg hover:border-primary/40 hover:bg-primary/5 transition-all">
-                    Get In Touch
-                  </button>
-                </Link>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link href="/projects">
+                    <button className="group relative px-8 py-4 bg-primary text-primary-foreground rounded-xl font-medium text-lg overflow-hidden transition-all shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40">
+                      <span className="relative z-10 flex items-center gap-2">
+                        View My Work
+                        <motion.div
+                          animate={{ x: [0, 5, 0] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        >
+                          <ArrowRight className="w-5 h-5" />
+                        </motion.div>
+                      </span>
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary"
+                        animate={{ x: ["-100%", "100%"] }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          repeatDelay: 1,
+                        }}
+                      />
+                    </button>
+                  </Link>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link
+                    href="https://drive.google.com/file/d/1Ty7tGp1wQTCig5ceojbohK8vKE-84zPQ/view"
+                    target="_blank"
+                  >
+                    <button className="group px-8 py-4 border-2 border-primary/30 text-foreground rounded-xl font-medium text-lg hover:border-primary/50 hover:bg-primary/5 transition-all flex items-center gap-2">
+                      Download CV
+                      <Download className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
+                    </button>
+                  </Link>
+                </motion.div>
               </motion.div>
             </div>
 
             {/* Spotify Widget Section */}
-            <motion.div variants={itemVariants} className="space-y-6">
-              <div className="flex items-center justify-center gap-3">
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent"></div>
-                <p className="text-sm md:text-base text-muted-foreground font-mono uppercase tracking-wider">
-                  Currently Listening
-                </p>
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent"></div>
-              </div>
-              <div className="flex justify-center">
-                <SpotifyWidget />
-              </div>
+            <motion.div variants={itemVariants} className="flex justify-center">
+              <SpotifyWidget />
             </motion.div>
           </motion.div>
         </div>
-
-        {/* Decorative Elements */}
-        <div className="absolute top-1/4 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
       </section>
     </GridBackground>
   );

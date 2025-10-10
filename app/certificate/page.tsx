@@ -7,6 +7,7 @@ import Link from "next/link";
 
 import { GridBackground } from "@/components/ui/grid-background";
 import { CustomCursor } from "@/components/CustomCursor";
+import { Award, Building, Calendar, ExternalLink } from "lucide-react";
 
 interface Certificate {
   title: string;
@@ -107,6 +108,19 @@ export default function MarketplacePage() {
               className="text-center max-w-4xl mx-auto mb-16"
               initial={{ opacity: 0, y: 20 }}
             >
+              {/* Badge */}
+              <motion.div
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
+                whileHover={{ scale: 1.05 }}
+              >
+                <Award className="w-4 h-4 text-primary" />
+                <span className="text-sm font-mono text-primary/90">
+                  Professional Credentials
+                </span>
+              </motion.div>
+              <span className="block text-muted-foreground/60 text-2xl md:text-3xl font-medium mb-3">
+                Earned
+              </span>
               <h1 className="text-5xl md:text-6xl font-bold font-grotesk mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-white">
                 Certifications
               </h1>
@@ -149,29 +163,38 @@ export default function MarketplacePage() {
                         </h2>
                       </div>
 
-                      <div>
-                        <h3 className="font-medium text-sm text-white/60 mb-3">
+                      <div className="flex items-center gap-2 text-sm">
+                        <Building className="w-4 h-4 text-primary flex-shrink-0" />
+                        <span className="font-mono text-muted-foreground">
                           {certificate.from}
-                        </h3>
+                        </span>
                       </div>
 
-                      <div>
-                        <h3 className="font-medium text-sm text-white/60 mb-3">
+                      <div className="flex items-center gap-2 text-sm">
+                        <Calendar className="w-4 h-4 text-primary flex-shrink-0" />
+                        <span className="font-mono text-muted-foreground">
                           {certificate.completedOn}
-                        </h3>
+                        </span>
                       </div>
 
-                      <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                        <div className="flex items-center gap-4">
+                      {/* Action Button */}
+                      <div className="pt-4">
+                        <motion.div
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
                           <Button
                             as={Link}
-                            className="px-6 py-2 bg-primary text-black font-medium rounded-lg hover:bg-primary/90 transition-colors"
+                            className="w-full flex items-center justify-center gap-2 bg-primary/10 border border-primary/30 hover:bg-primary/20 transition-all group/btn"
                             href={certificate.url}
                             target="_blank"
                           >
-                            View Certificate
+                            <span className="font-mono text-sm text-primary">
+                              View Certificate
+                            </span>
+                            <ExternalLink className="w-4 h-4 text-primary group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                           </Button>
-                        </div>
+                        </motion.div>
                       </div>
                     </div>
                   </div>

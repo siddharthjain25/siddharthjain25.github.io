@@ -7,9 +7,11 @@ import { cn } from "@/lib/utils";
 
 interface CustomCursorProps {
   className?: string;
+  children?: React.ReactNode;
 }
 
-export const CustomCursor = ({ className }: CustomCursorProps) => {
+export const CustomCursor = ({ className, children }: CustomCursorProps) => {
+  const [isMounted, setIsMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isPointer, setIsPointer] = useState(false);
   const [isText, setIsText] = useState(false);
@@ -21,6 +23,14 @@ export const CustomCursor = ({ className }: CustomCursorProps) => {
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
+    // Set mounted state
+    setIsMounted(true);
+
+    // Check if mobile
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      return;
+    }
+
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX - 16);
       cursorY.set(e.clientY - 16);
@@ -31,10 +41,10 @@ export const CustomCursor = ({ className }: CustomCursorProps) => {
 
     const handlePointerElements = () => {
       const buttons = document.querySelectorAll(
-        'button, a, input, textarea, [role="button"], [role="link"]',
+        'button, a, input, textarea, [role="button"], [role="link"]'
       );
       const textElements = document.querySelectorAll(
-        "p, h1, h2, h3, h4, h5, h6, span",
+        "p, h1, h2, h3, h4, h5, h6, span"
       );
 
       const handleButtonEnter = () => setIsPointer(true);
@@ -78,89 +88,93 @@ export const CustomCursor = ({ className }: CustomCursorProps) => {
     };
   }, [cursorX, cursorY]);
 
-  if (
-    typeof window !== "undefined" &&
-    window.matchMedia("(max-width: 768px)").matches
-  ) {
-    return null;
+  // Don't render anything on server or mobile
+  if (!isMounted) {
+    return <>{children}</>;
   }
+
+  const isMobile =
+    typeof window !== "undefined" &&
+    window.matchMedia("(max-width: 768px)").matches;
 
   return (
     <>
-      <motion.div
-        className={cn(
-          "pointer-events-none z-[1000] mix-blend-difference will-change-transform",
-          className,
-        )}
-        style={{
-          left: cursorXSpring,
-          top: cursorYSpring,
-          opacity: isVisible ? 1 : 0,
-          position: "fixed",
-        }}
-      >
-        <div className="relative">
-          {/* Main cursor */}
+      {children}
+      {!isMobile && (
+        <>
           <motion.div
-            animate={{
-              scale: isPointer ? 2 : isText ? 0.5 : 1,
-              opacity: isPointer ? 0.5 : 1,
+            className={cn(
+              "pointer-events-none fixed z-[1000] mix-blend-difference will-change-transform hidden md:block",
+              className
+            )}
+            style={{
+              left: cursorXSpring,
+              top: cursorYSpring,
+              opacity: isVisible ? 1 : 0,
             }}
-            className="w-8 h-8 bg-white rounded-full"
-            transition={{
-              type: "spring",
-              damping: 20,
-              stiffness: 200,
-              mass: 0.5,
-            }}
-          />
+          >
+            <div className="relative">
+              {/* Main cursor */}
+              <motion.div
+                animate={{
+                  scale: isPointer ? 2 : isText ? 0.5 : 1,
+                  opacity: isPointer ? 0.5 : 1,
+                }}
+                className="w-8 h-8 bg-white rounded-full"
+                transition={{
+                  type: "spring",
+                  damping: 20,
+                  stiffness: 200,
+                  mass: 0.5,
+                }}
+              />
 
-          {/* Outer ring */}
-          <motion.div
-            animate={{
-              scale: isPointer ? 1.5 : isText ? 2 : [1, 1.2, 1],
-              opacity: isPointer ? 0.2 : isText ? 0.1 : 0.3,
-            }}
-            className="absolute inset-0 border border-white rounded-full"
-            transition={
-              isPointer || isText
-                ? { type: "spring", damping: 20, stiffness: 200, mass: 0.5 }
-                : { duration: 2, repeat: Infinity }
+              {/* Outer ring */}
+              <motion.div
+                animate={{
+                  scale: isPointer ? 1.5 : isText ? 2 : [1, 1.2, 1],
+                  opacity: isPointer ? 0.2 : isText ? 0.1 : 0.3,
+                }}
+                className="absolute inset-0 border border-white rounded-full"
+                transition={
+                  isPointer || isText
+                    ? { type: "spring", damping: 20, stiffness: 200, mass: 0.5 }
+                    : { duration: 2, repeat: Infinity }
+                }
+              />
+
+              {/* Additional ring for text */}
+              {isText && (
+                <motion.div
+                  animate={{
+                    scale: 2.5,
+                    opacity: 0.05,
+                  }}
+                  className="absolute inset-0 border border-white rounded-full"
+                  initial={{ scale: 1, opacity: 0 }}
+                  transition={{
+                    type: "spring",
+                    damping: 20,
+                    stiffness: 200,
+                    mass: 0.5,
+                  }}
+                />
+              )}
+            </div>
+          </motion.div>
+
+          <style jsx>{`
+            * {
+              cursor: none !important;
             }
-          />
 
-          {/* Additional ring for text */}
-          {isText && (
-            <motion.div
-              animate={{
-                scale: 2.5,
-                opacity: 0.05,
-              }}
-              className="absolute inset-0 border border-white rounded-full"
-              initial={{ scale: 1, opacity: 0 }}
-              transition={{
-                type: "spring",
-                damping: 20,
-                stiffness: 200,
-                mass: 0.5,
-              }}
-            />
-          )}
-        </div>
-      </motion.div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          * {
-            cursor: auto !important;
-          }
-        }
-
-        ::selection {
-          background: rgba(255, 255, 255, 0.1);
-          color: inherit;
-        }
-      `}</style>
+            ::selection {
+              background: rgba(255, 255, 255, 0.1);
+              color: inherit;
+            }
+          `}</style>
+        </>
+      )}
     </>
   );
 };

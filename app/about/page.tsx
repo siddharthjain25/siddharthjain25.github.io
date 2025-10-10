@@ -8,6 +8,9 @@ import {
   LucideIcon,
   ChartArea,
   GitPullRequest,
+  Sparkles,
+  Github,
+  Activity,
 } from "lucide-react";
 
 import { About } from "@/components/About";
@@ -55,98 +58,136 @@ export default function AboutPage() {
       {/* About Section */}
       <About />
       <Education />
-      {/* Interests Section */}
-      <section className="py-20 relative overflow-hidden">
+
+      {/* Minimal Interests Section */}
+      <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,theme(colors.white/[0.03])_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.white/[0.03])_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
         </div>
 
         <div className="container mx-auto px-4">
+          {/* Minimal Header */}
           <motion.div
-            className="text-center mb-16"
+            className="mb-16"
             initial={{ opacity: 0, y: 20 }}
             viewport={{ once: true }}
             whileInView={{ opacity: 1, y: 0 }}
           >
-            <span className="inline-block text-sm font-mono text-primary/80 bg-primary/5 border border-primary/10 px-3 py-1 rounded-full mb-4">
-              Interests & Focus
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold font-grotesk mb-4">
-              Areas of Interest
-            </h2>
-            <p className="text-muted-foreground font-mono max-w-2xl mx-auto">
-              Technologies and domains that excite me and drive my continuous
-              learning
-            </p>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="h-px flex-1 bg-primary/20" />
+              <Sparkles className="w-5 h-5 text-primary" />
+              <h2 className="text-3xl md:text-4xl font-bold font-grotesk">
+                Areas of Interest
+              </h2>
+              <div className="h-px flex-1 bg-primary/20" />
+            </div>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {interests.map((interest, index) => (
-              <motion.div
-                key={interest.name}
-                className="group"
-                initial={{ opacity: 0, scale: 0.8 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileInView={{ opacity: 1, scale: 1 }}
-              >
-                <Card className="bg-black/50 backdrop-blur-xl border-white/10 hover:border-primary/50 transition-all duration-300 overflow-hidden">
-                  <CardContent className="p-6 text-center relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="relative">
-                      <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                        <interest.icon className="w-8 h-8 text-primary/80" />
-                      </div>
-                      <h3 className="text-xl font-bold font-grotesk mb-2">
+          {/* Simple List Layout */}
+          <div className="max-w-4xl mx-auto space-y-4">
+            {interests.map((interest, index) => {
+              const Icon = interest.icon;
+
+              return (
+                <motion.div
+                  key={interest.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  transition={{ delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                >
+                  <motion.div
+                    className="group flex items-center gap-6 p-6 rounded-xl border border-border hover:border-primary/40 bg-secondary/30 hover:bg-secondary/50 transition-all cursor-pointer"
+                    whileHover={{ x: 10 }}
+                  >
+                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <Icon className="w-6 h-6 text-primary" />
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-xl font-bold font-grotesk mb-1 group-hover:text-primary transition-colors">
                         {interest.name}
                       </h3>
-                      <p className="text-sm font-mono text-white/50 mb-4">
+                      <p className="text-sm text-muted-foreground font-mono">
                         {interest.description}
                       </p>
-                      <div className="h-1 w-12 bg-primary/50 mx-auto rounded-full transform origin-center group-hover:scale-x-150 transition-transform duration-300" />
                     </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+
+                    <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="w-2 h-2 rounded-full bg-primary" />
+                    </div>
+                  </motion.div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-black text-white relative overflow-hidden">
+      {/* Simplified GitHub Section */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,theme(colors.white/[0.03])_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.white/[0.03])_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        </div>
+
         <div className="container mx-auto px-4">
+          {/* Minimal Header */}
           <motion.div
-            className="text-center mb-16"
+            className="mb-16"
             initial={{ opacity: 0, y: 20 }}
             viewport={{ once: true }}
             whileInView={{ opacity: 1, y: 0 }}
           >
-            <span className="inline-block text-sm font-mono text-primary/80 bg-primary/5 border border-primary/10 px-3 py-1 rounded-full mb-4">
-              GitHub Activity
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold font-grotesk mb-4">
-              My OpenSource Contributions
-            </h2>
-            <p className="text-muted-foreground font-mono max-w-2xl mx-auto">
-              A visual representation of my GitHub contributions over the past
-              year.
-            </p>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="h-px flex-1 bg-primary/20" />
+              <Github className="w-5 h-5 text-primary" />
+              <h2 className="text-3xl md:text-4xl font-bold font-grotesk">
+                GitHub Activity
+              </h2>
+              <div className="h-px flex-1 bg-primary/20" />
+            </div>
           </motion.div>
 
-          <motion.div
-            className="flex justify-center"
-            initial={{ opacity: 0 }}
-            viewport={{ once: true }}
-            whileInView={{ opacity: 1 }}
-          >
-            <img
-              alt="GitHub Stats"
-              className="rounded-xl shadow-lg border border-white/10 mx-auto w-full max-w-xl filter grayscale transition duration-300"
-              src="https://github-readme-stats.vercel.app/api?username=siddharthjain25&show_icons=true&theme=dark&hide_title=true&hide_rank=true&hide=stars&bg_color=000000&text_color=ffffff"
-            />
-          </motion.div>
+          {/* Clean Stats Layout */}
+          <div className="max-w-5xl mx-auto space-y-8">
+            {/* Streak */}
+            <motion.div
+              className="p-6 rounded-xl border border-border bg-secondary/30 hover:border-primary/40 transition-all"
+              initial={{ opacity: 0, y: 20 }}
+              transition={{ delay: 0.2 }}
+              viewport={{ once: true }}
+              whileInView={{ opacity: 1, y: 0 }}
+            >
+              <img
+                alt="GitHub Streak Stats"
+                className="w-full h-auto"
+                src="https://github-readme-streak-stats.herokuapp.com/?user=siddharthjain25&theme=highcontrast&hide_border=true&border=00000000&stroke=ffffff&ring=ffffff&fire=ffffff&currStreakNum=ffffff&sideNums=ffffff&currStreakLabel=ffffff&sideLabels=ffffff&dates=ffffff&background=00000000"
+              />
+            </motion.div>
+
+            {/* Contribution Graph */}
+            <motion.div
+              className="p-6 rounded-xl border border-border bg-secondary/30 hover:border-primary/40 transition-all"
+              initial={{ opacity: 0, y: 20 }}
+              transition={{ delay: 0.1 }}
+              viewport={{ once: true }}
+              whileInView={{ opacity: 1, y: 0 }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <Activity className="w-5 h-5 text-primary" />
+                <h3 className="text-lg font-bold font-grotesk">
+                  Contribution Graph
+                </h3>
+              </div>
+              <div className="overflow-x-auto">
+                <img
+                  alt="GitHub Contribution Graph"
+                  className="w-full h-auto min-w-[600px]"
+                  src="https://github-readme-activity-graph.vercel.app/graph?username=siddharthjain25&theme=black&bg_color=00000000&color=ffffff&line=ffffff&point=ffffff&hide_border=true&custom_title="
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
