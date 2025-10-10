@@ -46,6 +46,7 @@ export const LoaderScreen = ({
       // Skip loader for returning visitors
       setIsLoading(false);
       setIsFullyRemoved(true);
+
       return;
     }
 
@@ -61,8 +62,10 @@ export const LoaderScreen = ({
       setLoadingProgress((prev) => {
         if (prev >= 100) {
           clearInterval(progressInterval);
+
           return 100;
         }
+
         return prev + Math.random() * 15;
       });
     }, 200);

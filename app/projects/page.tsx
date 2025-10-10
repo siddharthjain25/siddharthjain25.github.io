@@ -1,18 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { FolderGit2 } from "lucide-react";
 
 import { projects } from "./data/projects";
 
 import { GridBackground } from "@/components/ui/grid-background";
 import { ProjectCard } from "@/components/ProjectCard";
-import { CustomCursor } from "@/components/CustomCursor";
-import { FolderGit2 } from "lucide-react";
 
 export default function ProjectsPage() {
   return (
     <main className="min-h-screen bg-black text-white">
-      <CustomCursor />
       <GridBackground>
         <section className="relative py-20 overflow-hidden">
           {/* ... background decorations ... */}

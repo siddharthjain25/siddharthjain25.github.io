@@ -3,9 +3,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Music, ExternalLink, Radio } from "lucide-react";
+
 import { Card, CardContent } from "@/components/ui/card";
 import WaveBars from "@/components/WaveBars";
-import Link from "next/link";
 
 // Custom hook to fetch Spotify currently playing song
 const useSpotify = (refreshInterval = 3000) => {
@@ -21,7 +21,7 @@ const useSpotify = (refreshInterval = 3000) => {
     const fetchNowPlaying = async () => {
       try {
         const response = await fetch(
-          "https://siddharth25op-spotify-status.vercel.app/api/now-playing"
+          "https://siddharth25op-spotify-status.vercel.app/api/now-playing",
         );
 
         if (response.status === 204 || response.status > 400) {
@@ -43,8 +43,7 @@ const useSpotify = (refreshInterval = 3000) => {
         setTitle(data.title);
         setError(null);
       } catch (err) {
-        setError("Failed to fetch Spotify data");
-        console.error(err);
+        setError("Failed to fetch Spotify data" + err);
       } finally {
         setIsLoading(false);
       }
@@ -60,8 +59,7 @@ const useSpotify = (refreshInterval = 3000) => {
 };
 
 const SpotifyWidget = () => {
-  const { track, title, artist, songUrl, albumUrl, isLoading, error } =
-    useSpotify();
+  const { title, artist, songUrl, albumUrl, isLoading, error } = useSpotify();
 
   const isPlaying = !isLoading && !error && songUrl && albumUrl;
 
@@ -140,8 +138,8 @@ const SpotifyWidget = () => {
                     className="relative flex h-2 w-2"
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1DB954] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#1DB954]"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1DB954] opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#1DB954]" />
                   </motion.span>
                   <span className="text-xs font-mono text-[#1DB954]">LIVE</span>
                 </motion.div>
@@ -199,11 +197,11 @@ const SpotifyWidget = () => {
               <AnimatePresence mode="wait">
                 {isLoading ? (
                   <motion.div
+                    key="loading"
                     animate={{ opacity: 1 }}
                     className="space-y-3"
                     exit={{ opacity: 0 }}
                     initial={{ opacity: 0 }}
-                    key="loading"
                   >
                     <div className="space-y-2">
                       <motion.div
@@ -224,11 +222,11 @@ const SpotifyWidget = () => {
                   </motion.div>
                 ) : error || !songUrl ? (
                   <motion.div
+                    key="error"
                     animate={{ opacity: 1, y: 0 }}
                     className="space-y-2"
                     exit={{ opacity: 0, y: -10 }}
                     initial={{ opacity: 0, y: 10 }}
-                    key="error"
                   >
                     <p className="font-grotesk text-xl font-bold text-foreground">
                       Not Playing
@@ -245,12 +243,12 @@ const SpotifyWidget = () => {
                   </motion.div>
                 ) : (
                   <motion.a
+                    key="playing"
                     animate={{ opacity: 1, y: 0 }}
                     className="block group/track cursor-pointer space-y-2"
                     exit={{ opacity: 0, y: -10 }}
                     href={songUrl}
                     initial={{ opacity: 0, y: 10 }}
-                    key="playing"
                     rel="noopener noreferrer"
                     target="_blank"
                     whileHover={{ x: 4 }}
@@ -259,8 +257,8 @@ const SpotifyWidget = () => {
                     <div className="relative overflow-hidden">
                       <motion.p
                         className="font-grotesk text-xl font-bold text-foreground group-hover/track:text-primary transition-colors flex items-center gap-2"
-                        whileHover={{ x: title.length > 20 ? -20 : 0 }}
                         transition={{ duration: 0.3 }}
+                        whileHover={{ x: title.length > 20 ? -20 : 0 }}
                       >
                         <span className="truncate">{title}</span>
                         <ExternalLink className="w-4 h-4 flex-shrink-0 opacity-0 group-hover/track:opacity-100 transition-opacity" />

@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 
 import { About } from "@/components/About";
-import { Card, CardContent } from "@/components/ui/card";
 import { Skills } from "@/components/Skills";
 import { Education } from "@/components/Education";
 

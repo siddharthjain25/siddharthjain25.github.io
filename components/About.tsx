@@ -2,68 +2,14 @@
 
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import Image from "next/image";
-import {
-  ArrowDownToLine,
-  ExternalLink,
-  Music,
-  Bird,
-  Code2,
-  Sparkles,
-  Github,
-  Linkedin,
-  Mail,
-} from "lucide-react";
+import { ArrowDownToLine, ExternalLink, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+
 import SpotifyWidget from "./SpotifyWidget";
 
-const quickInfo = [
-  { label: "Age", value: "21", icon: "👤" },
-  { label: "Location", value: "Pune, India", icon: "📍" },
-  { label: "Experience", value: "Fresher", icon: "💼" },
-  { label: "Status", value: "Available", icon: "✨" },
-];
-
-const skills = [
-  "React",
-  "Next.js",
-  "TypeScript",
-  "Node.js",
-  "Tailwind CSS",
-  "MongoDB",
-  "PostgreSQL",
-  "REST APIs",
-];
-
-const interests = [
-  { icon: Code2, label: "Coding", color: "text-blue-400" },
-  { icon: Music, label: "Music", color: "text-purple-400" },
-  { icon: Bird, label: "Anime", color: "text-amber-400" },
-  { icon: Sparkles, label: "Design", color: "text-pink-400" },
-];
-
-const socialLinks = [
-  {
-    icon: Github,
-    label: "GitHub",
-    href: "https://github.com/siddharthjain25",
-    color: "hover:text-purple-400",
-  },
-  {
-    icon: Linkedin,
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/siddharth25op",
-    color: "hover:text-blue-400",
-  },
-  {
-    icon: Mail,
-    label: "Email",
-    href: "mailto:work@siddharth.is-a.dev",
-    color: "hover:text-green-400",
-  },
-];
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export const About = () => {
   const [isImageHovered, setIsImageHovered] = useState(false);
@@ -77,6 +23,7 @@ export const About = () => {
     const rect = e.currentTarget.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
+
     mouseX.set(e.clientX - centerX);
     mouseY.set(e.clientY - centerY);
   };
@@ -146,14 +93,14 @@ export const About = () => {
                 whileTap={{ scale: 0.95 }}
               >
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
                 </span>
                 About Me
               </motion.span>
               <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold font-grotesk">
                 <span className="block text-muted-foreground/60 text-2xl md:text-3xl font-medium mb-3">
-                  I'm a
+                  I&apos;m a
                 </span>
                 <motion.span
                   animate={{
@@ -181,8 +128,8 @@ export const About = () => {
 
               {/* Spotify Status Card */}
               <motion.div
-                whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300 }}
+                whileHover={{ scale: 1.02 }}
               >
                 <SpotifyWidget />
               </motion.div>
@@ -239,8 +186,8 @@ export const About = () => {
                   <span className="flex items-center gap-2">
                     View Projects
                     <motion.div
-                      whileHover={{ x: 2, y: -2 }}
                       transition={{ type: "spring", stiffness: 400 }}
+                      whileHover={{ x: 2, y: -2 }}
                     >
                       <ExternalLink className="h-4 w-4" />
                     </motion.div>
@@ -304,7 +251,7 @@ export const About = () => {
                       width={600}
                     />
                     {/* Overlay gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                     {/* Scan line effect */}
                     <motion.div
@@ -369,7 +316,7 @@ export const About = () => {
                           delay: index * 0.3,
                         }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                       <motion.p
                         animate={{
                           backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
@@ -417,7 +364,7 @@ export const About = () => {
                         Fun Fact
                       </h4>
                       <p className="text-sm text-muted-foreground font-mono leading-relaxed">
-                        I debug faster when listening to music. There's
+                        I debug faster when listening to music. There&apos;s
                         something about a good beat that helps me spot those
                         sneaky semicolons! 🎵
                       </p>

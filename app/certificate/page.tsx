@@ -4,10 +4,9 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@heroui/react";
 import Link from "next/link";
+import { Award, Building, Calendar, ExternalLink } from "lucide-react";
 
 import { GridBackground } from "@/components/ui/grid-background";
-import { CustomCursor } from "@/components/CustomCursor";
-import { Award, Building, Calendar, ExternalLink } from "lucide-react";
 
 interface Certificate {
   title: string;
@@ -93,7 +92,6 @@ const certificates: Certificate[] = [
 export default function MarketplacePage() {
   return (
     <main className="bg-black text-white">
-      <CustomCursor />
       <GridBackground>
         <section className="relative py-20 overflow-hidden">
           <div className="absolute inset-0 -z-10">

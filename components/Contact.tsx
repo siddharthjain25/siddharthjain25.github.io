@@ -95,7 +95,7 @@ const ContactSuccessModal = ({
                 Message Sent Successfully!
               </h3>
               <p className="text-muted-foreground font-mono text-lg">
-                Thank you for reaching out. I'll get back to you soon.
+                Thank you for reaching out. I&apos;ll get back to you soon.
               </p>
             </motion.div>
 
@@ -133,8 +133,8 @@ const ContactSuccessModal = ({
                 <div className="bg-secondary/50 backdrop-blur-sm rounded-xl p-5 text-center border border-primary/10 hover:border-primary/30 transition-colors">
                   <div className="flex items-center justify-center gap-2 mb-2">
                     <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
                     </span>
                     <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
                       Status
@@ -161,7 +161,7 @@ const ContactSuccessModal = ({
                 onClick={onClose}
               >
                 <span className="relative z-10">Close</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80 opacity-0 group-hover:opacity-100 transition-opacity" />
               </Button>
             </motion.div>
           </motion.div>
@@ -216,7 +216,7 @@ export const Contact = () => {
   };
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
 
@@ -292,8 +292,8 @@ export const Contact = () => {
       {/* Enhanced Background with Gradient Orbs */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,theme(colors.white/[0.05])_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.white/[0.05])_1px,transparent_1px)] bg-[size:4rem_4rem] dark:opacity-20 opacity-10" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
 
       <div className="container">
@@ -312,17 +312,17 @@ export const Contact = () => {
               transition={{ duration: 2, repeat: Infinity }}
             >
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
               </span>
               Open for opportunities
             </motion.div>
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold font-grotesk mb-6 bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground/80 to-foreground/60">
-              Let's Work Together
+              Let&apos;s Work Together
             </h2>
             <p className="text-xl md:text-2xl text-muted-foreground font-mono max-w-3xl mx-auto leading-relaxed">
-              Have a project in mind? Fill out the form below and I'll get back
-              to you within{" "}
+              Have a project in mind? Fill out the form below and I&apos;ll get
+              back to you within{" "}
               <span className="text-primary font-semibold">24-48 hours</span>.
             </p>
           </motion.div>
@@ -566,8 +566,10 @@ export const Contact = () => {
                               viewBox="0 0 24 24"
                             >
                               <>
-                                className="opacity-25" cx="12" cy="12" r="10"
-                                stroke="currentColor" strokeWidth="4"4"
+                                className=&quot;opacity-25&quot;
+                                cx=&quot;12&quot; cy=&quot;12&quot;
+                                r=&quot;10&quot; stroke=&quot;currentColor&quot;
+                                strokeWidth=&quot;4&quot;4&quot;
                               </>
                               <path
                                 className="opacity-75"
@@ -596,7 +598,7 @@ export const Contact = () => {
                           </>
                         )}
                       </span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </Button>
                   </CardFooter>
                 </form>
@@ -696,7 +698,7 @@ export const Contact = () => {
               <Card className="border-primary/20 shadow-lg bg-gradient-to-br from-background to-secondary/20">
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-grotesk font-bold mb-6">
-                    Let's Connect
+                    Let&apos;s Connect
                   </h3>
                   <div className="grid grid-cols-1 gap-3">
                     {[

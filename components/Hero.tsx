@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
+
 import { GridBackground } from "./ui/grid-background";
 import SpotifyWidget from "./SpotifyWidget";
 
@@ -54,20 +55,6 @@ export const Hero = () => {
     },
   };
 
-  const socialLinks = [
-    {
-      icon: Github,
-      href: "https://github.com/siddharthjain25",
-      label: "GitHub",
-    },
-    {
-      icon: Linkedin,
-      href: "https://www.linkedin.com/in/siddharth25op",
-      label: "LinkedIn",
-    },
-    { icon: Mail, href: "mailto:work@siddharth.is-a.dev", label: "Email" },
-  ];
-
   return (
     <GridBackground>
       <section
@@ -96,17 +83,17 @@ export const Hero = () => {
 
         <div className="container z-10 px-4">
           <motion.div
-            variants={containerVariants}
-            initial="hidden"
             animate={inView && shouldAnimate ? "visible" : "hidden"}
             className="max-w-6xl mx-auto space-y-16"
+            initial="hidden"
+            variants={containerVariants}
           >
             {/* Main Content */}
             <div className="space-y-10 text-center">
               {/* Greeting Badge */}
               <motion.div
-                variants={itemVariants}
                 className="flex justify-center"
+                variants={itemVariants}
               >
                 <motion.span
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-mono text-sm border border-primary/20 backdrop-blur-sm"
@@ -114,30 +101,30 @@ export const Hero = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
                   </span>
                   Available for opportunities
                 </motion.span>
               </motion.div>
 
               {/* Main Title with Enhanced Typography */}
-              <motion.div variants={itemVariants} className="space-y-6">
+              <motion.div className="space-y-6" variants={itemVariants}>
                 <motion.p
+                  animate={{ opacity: 1, x: 0 }}
                   className="text-2xl md:text-3xl lg:text-4xl font-medium text-muted-foreground font-mono"
                   initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.5, duration: 0.8 }}
                 >
-                  Hey there! I'm
+                  Hey there! I&apos;m
                 </motion.p>
 
                 <h1 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold font-grotesk tracking-tight">
                   <motion.span
-                    className="block bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent"
                     animate={{
                       backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                     }}
+                    className="block bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent"
                     style={{
                       backgroundSize: "200% 200%",
                     }}
@@ -153,7 +140,7 @@ export const Hero = () => {
               </motion.div>
 
               {/* Role & Description */}
-              <motion.div variants={itemVariants} className="space-y-4">
+              <motion.div className="space-y-4" variants={itemVariants}>
                 <p className="text-2xl md:text-3xl font-bold text-primary">
                   Full Stack Developer
                 </p>
@@ -166,8 +153,8 @@ export const Hero = () => {
 
               {/* CTA Buttons */}
               <motion.div
-                variants={itemVariants}
                 className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+                variants={itemVariants}
               >
                 <motion.div
                   whileHover={{ scale: 1.05 }}
@@ -185,8 +172,8 @@ export const Hero = () => {
                         </motion.div>
                       </span>
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary"
                         animate={{ x: ["-100%", "100%"] }}
+                        className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary"
                         transition={{
                           duration: 2,
                           repeat: Infinity,
@@ -215,7 +202,7 @@ export const Hero = () => {
             </div>
 
             {/* Spotify Widget Section */}
-            <motion.div variants={itemVariants} className="flex justify-center">
+            <motion.div className="flex justify-center" variants={itemVariants}>
               <SpotifyWidget />
             </motion.div>
           </motion.div>

@@ -31,14 +31,14 @@ export function ProjectCard({
     {
       damping: 30,
       stiffness: 150,
-    }
+    },
   );
   const rotateY = useSpring(
     useTransform(mouseX, [-0.5, 0.5], ["-5deg", "5deg"]),
     {
       damping: 30,
       stiffness: 150,
-    }
+    },
   );
 
   // Lighting effect based on mouse position
@@ -195,16 +195,16 @@ export function ProjectCard({
                     {project.githubUrl && (
                       <motion.button
                         className="flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary/50 border border-border hover:border-primary/40 hover:bg-secondary transition-all group/btn"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={(e) => {
                           e.stopPropagation();
                           window.open(
                             project.githubUrl,
                             "_blank",
-                            "noopener,noreferrer"
+                            "noopener,noreferrer",
                           );
                         }}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
                       >
                         <Github className="w-4 h-4 text-muted-foreground group-hover/btn:text-primary transition-colors" />
                         <span className="text-xs font-mono text-muted-foreground group-hover/btn:text-primary transition-colors">
@@ -216,16 +216,16 @@ export function ProjectCard({
                     {project.srsDocUrl && (
                       <motion.button
                         className="flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary/50 border border-border hover:border-primary/40 hover:bg-secondary transition-all group/btn"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={(e) => {
                           e.stopPropagation();
                           window.open(
                             project.srsDocUrl,
                             "_blank",
-                            "noopener,noreferrer"
+                            "noopener,noreferrer",
                           );
                         }}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
                       >
                         <ScrollText className="w-4 h-4 text-muted-foreground group-hover/btn:text-primary transition-colors" />
                         <span className="text-xs font-mono text-muted-foreground group-hover/btn:text-primary transition-colors">
@@ -237,16 +237,16 @@ export function ProjectCard({
                     {project.demoUrl && (
                       <motion.button
                         className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 border border-primary/30 hover:bg-primary/20 transition-all group/btn"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={(e) => {
                           e.stopPropagation();
                           window.open(
                             project.demoUrl,
                             "_blank",
-                            "noopener,noreferrer"
+                            "noopener,noreferrer",
                           );
                         }}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
                       >
                         <ExternalLink className="w-4 h-4 text-primary transition-colors" />
                         <span className="text-xs font-mono text-primary transition-colors">

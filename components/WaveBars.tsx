@@ -13,6 +13,7 @@ const Bar = ({ delay }: { delay: number }) => {
       if (!mounted) return;
       // Random height between 10px and 50px
       const newHeight = 5 + Math.random() * 30;
+
       setHeight(newHeight);
 
       // Random duration for realism
@@ -32,11 +33,11 @@ const Bar = ({ delay }: { delay: number }) => {
   return (
     <motion.span
       animate={{ height }}
+      className="flex-1 bg-gray-300 mx-[1px] rounded-full"
       transition={{
         duration: 0.4,
         ease: "easeInOut",
       }}
-      className="flex-1 bg-gray-300 mx-[1px] rounded-full"
     />
   );
 };
