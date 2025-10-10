@@ -216,7 +216,7 @@ export const Contact = () => {
   };
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
 
@@ -240,29 +240,46 @@ export const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("https://formspree.io/f/xzbngqrj", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "9cd2c872-1058-4246-9d85-29a341936fe1",
           name: formData.name,
           email: formData.email,
           message: formData.message,
         }),
       });
 
-      const result = await response.json();
-
-      if (result.success) {
+      // Formspree returns ok status (200-299) for successful submissions
+      if (response.ok) {
         setIsSuccessModalOpen(true);
         formRef.current?.reset();
         setFormData({ name: "", email: "", message: "" });
+      } else {
+        // Handle Formspree error response
+        const result = await response.json();
+        console.error("Formspree Error:", result);
+
+        // Show user-friendly error message
+        if (result.errors) {
+          // Handle field-specific errors from Formspree
+          const newErrors = { name: "", email: "", message: "" };
+          result.errors.forEach((error: any) => {
+            if (error.field === "email") {
+              newErrors.email = error.message;
+            }
+          });
+          setErrors(newErrors);
+        } else {
+          alert("Failed to send message. Please try again.");
+        }
       }
     } catch (error) {
-      return error;
+      console.error("Network Error:", error);
+      alert("Network error. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -364,9 +381,12 @@ export const Contact = () => {
                         <h3 className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-1">
                           Email
                         </h3>
-                        <p className="font-grotesk text-sm font-medium break-all">
+                        <a
+                          href="mailto:work@siddharth.is-a.dev"
+                          className="font-grotesk text-sm font-medium break-all hover:text-primary transition-colors"
+                        >
                           work@siddharth.is-a.dev
-                        </p>
+                        </a>
                       </div>
                     </CardContent>
                   </Card>
@@ -552,7 +572,6 @@ export const Contact = () => {
                     <Button
                       className="w-full group relative overflow-hidden"
                       disabled={isSubmitting}
-                      isLoading={isSubmitting}
                       size="lg"
                       type="submit"
                       variant="primary"
@@ -565,12 +584,14 @@ export const Contact = () => {
                               fill="none"
                               viewBox="0 0 24 24"
                             >
-                              <>
-                                className=&quot;opacity-25&quot;
-                                cx=&quot;12&quot; cy=&quot;12&quot;
-                                r=&quot;10&quot; stroke=&quot;currentColor&quot;
-                                strokeWidth=&quot;4&quot;4&quot;
-                              </>
+                              <circle
+                                className="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                              />
                               <path
                                 className="opacity-75"
                                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
