@@ -39,7 +39,7 @@
     "react-hook-form": "^7.57.0",
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^9.16.0",
-    "react-syntax-highlighter": "^15.6.1",
+    "react-syntax-highlighter": "^16.1.0",
     "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {
@@ -54,7 +54,7 @@
     "@typescript-eslint/eslint-plugin": "8.31.1",
     "@typescript-eslint/parser": "8.31.1",
     "autoprefixer": "10.4.21",
-    "eslint": "9.25.1",
+    "eslint": "^9.38.0",
     "eslint-config-next": "15.3.1",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-import": "2.31.0",

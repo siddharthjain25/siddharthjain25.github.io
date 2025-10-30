@@ -18,6 +18,13 @@ interface Certificate {
 
 const certificates: Certificate[] = [
   {
+    title: "Tableau A-Z",
+    image: "https://i.postimg.cc/XYYs8XVd/Tableau-Ato-Z.jpg",
+    url: "https://drive.google.com/file/d/1x1r1DyHfjS9-uSWNr_4edXS7LTVYSDRQ/view",
+    from: "From Udemy",
+    completedOn: "Completed on 30 October 2025",
+  },
+  {
     title: "Web Development Bootcamp",
     image: "https://i.postimg.cc/SxNrhL3G/Web-development-bootcamp.jpg",
     url: "https://drive.google.com/file/d/1agfMeEnn6KsntUCz7r0SOI-2Eg-thq92/view",
@@ -25,23 +32,9 @@ const certificates: Certificate[] = [
     completedOn: "Completed on 10 Febuary 2024",
   },
   {
-    title: "Accenture UK - Developer and Technology Job Simulation",
-    image: "https://i.postimg.cc/DwK9dNWw/accenture-forage.jpg",
-    url: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Accenture%20UK/3xnZEj9kfpoQKW885_Accenture%20UK_ecsJwSusswDvszhbv_1726387813150_completion_certificate.pdf",
-    from: "From Forage",
-    completedOn: "Completed on 15 September 2024",
-  },
-  {
-    title: "J.P. Morgan - Software Engineering Virtual Experience",
-    image: "https://i.postimg.cc/pT779cbx/J-P-Morgan.jpg",
-    url: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/J.P.%20Morgan/R5iK7HMxJGBgaSbvk_J.P.%20Morgan_ecsJwSusswDvszhbv_1726993624459_completion_certificate.pdf",
-    from: "From Forage",
-    completedOn: "Completed on 22 September 2024",
-  },
-  {
     title: "AWS Certified Cloud Practitioner CLF-C02",
     image: "https://i.postimg.cc/Bv4mX9j2/awscloudpract.jpg",
-    url: "https://drive.google.com/file/d/1dtDrblQPjyOm9QkwjvgcoybvymSJXY--/view?usp=sharing",
+    url: "https://drive.google.com/file/d/1dtDrblQPjyOm9QkwjvgcoybvymSJXY--/view",
     from: "From Udemy",
     completedOn: "Completed on 14 october 2024",
   },
